@@ -3,10 +3,19 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/store'
 import { deleteLabel } from '@/features/labels/labelSlice'
+import { useEffect, useState } from 'react'
 
 export default function LabelList() {
-  const labels = useSelector((state: RootState) => state.labels)
   const dispatch = useDispatch()
+  const labels = useSelector((state: RootState) => state.labels)
+
+  // ⬇ Wait until client has hydrated
+  const [hasMounted, setHasMounted] = useState(false)
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
+  if (!hasMounted) return null // Avoid mismatch
 
   if (labels.length === 0) {
     return <p className="text-gray-500 mt-4">No labels yet.</p>
