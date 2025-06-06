@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import labelReducer from '@/features/labels/labelSlice'
 import type { Label } from '@/features/labels/types'
 
-
 const saveToLocalStorage = (labels: Label[]) => {
   try {
     localStorage.setItem('labels', JSON.stringify(labels))
@@ -15,16 +14,14 @@ export const store = configureStore({
   reducer: {
     labels: labelReducer,
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(store => next => action => {
-      const result = next(action)
-      const state = store.getState()
-      if (typeof window !== 'undefined') {
-        saveToLocalStorage(state.labels)
-      }
-      return result
-    }),
 })
+
+if (typeof window !== 'undefined') {
+  store.subscribe(() => {
+    const state = store.getState()
+    saveToLocalStorage(state.labels)
+  })
+}
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
