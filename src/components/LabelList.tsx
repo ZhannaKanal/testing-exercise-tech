@@ -9,20 +9,19 @@ export default function LabelList() {
   const dispatch = useDispatch()
   const labels = useSelector((state: RootState) => state.labels)
 
-  // ⬇ Wait until client has hydrated
+
   const [hasMounted, setHasMounted] = useState(false)
   useEffect(() => {
     setHasMounted(true)
   }, [])
 
-  if (!hasMounted) return null // Avoid mismatch
-
+  if (!hasMounted) return null 
   if (labels.length === 0) {
     return <p className="text-gray-500 mt-4">No labels yet.</p>
   }
 
   return (
-    <div className="mt-6 space-y-4">
+    <div className="mt-6 space-y-4 max-h-[60vh] overflow-y-auto pr-2">
       <h2 className="text-lg font-semibold">Your Labels</h2>
       {labels.map(label => (
         <div

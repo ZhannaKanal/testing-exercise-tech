@@ -41,7 +41,7 @@ export default function LabelForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md p-4 border rounded-[8px] bg-white shadow text-[#a45f1f]">
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-full p-4 border rounded-[8px] bg-white shadow text-[#a45f1f]">
       <h2 className="text-xl font-semibold ">Create Label</h2>
 
       <input
@@ -106,7 +106,7 @@ export default function LabelForm() {
 
       <button
         type="submit"
-        className="bg-[#e69138] hover:bg-[#f9cb9c] text-white hover:text-[#b45f06] py-2 px-4 rounded-[8px] w-1/2 mx-auto"
+        className="bg-[#e69138] hover:bg-[#f9cb9c] text-white hover:text-[#b45f06] py-2 px-4 rounded-[8px] w-1/2 my-6"
       >
         Add Label
       </button>
